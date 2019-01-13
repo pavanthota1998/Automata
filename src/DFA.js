@@ -1,6 +1,6 @@
 class DFA {
   constructor(tuple) {
-    this.state = tuple.state;
+    this.states = tuple.states;
     this.alphabets = tuple.alphabets;
     this.transitionFunction = tuple.transitionFunction;
     this.startingState = tuple.startingState;
