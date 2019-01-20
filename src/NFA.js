@@ -25,6 +25,10 @@ class NFA {
 			temp = [];
 		} while (statesToCheckForEpsilon.length != 0);
 	}
+
+	changeState(finalState, alphabet) {
+		return this.transitionFunction[finalState][alphabet];
+	}
 }
 
 module.exports = NFA;

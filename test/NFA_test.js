@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 const assert = require('chai').assert;
 const _ = require('underscore')._;
 const NFA = require('../src/NFA.js');
@@ -54,6 +55,20 @@ describe('#NFA', () => {
 
 				nfa.addEpsilons(currentStates);
 				assert.ok(!_.isEmpty(currentStates));
+			});
+		});
+
+		describe('changeState', () => {
+			it('should return q3 in an array when passed q2 as state and 0 as alphabet', function () {
+				assert.deepEqual(nfa.changeState('q2', 0), ['q3']);
+			});
+
+			it('should return q4 in an array when passed q3 as state and 1 as alphabet', function () {
+				assert.isNotOk(nfa.changeState('q2', 1));
+			});
+
+			it('should return q4 in an array when passed q3 as state and 1 as alphabet', function () {
+				assert.deepEqual(nfa.changeState('q1', 'e'), ['q2', 'q5']);
 			});
 		});
 	});
