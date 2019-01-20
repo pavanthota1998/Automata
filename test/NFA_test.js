@@ -1,4 +1,5 @@
 const assert = require('chai').assert;
+const _ = require('underscore')._;
 const NFA = require('../src/NFA.js');
 
 describe('#NFA', () => {
@@ -46,6 +47,13 @@ describe('#NFA', () => {
 
 				nfa.addEpsilons(currentStates);
 				assert.deepEqual(currentStates, expected);
+			});
+
+			it('should not add any states to current states if epsilon transition is not present', () => {
+				let currentStates = ['q2'];
+
+				nfa.addEpsilons(currentStates);
+				assert.ok(!_.isEmpty(currentStates));
 			});
 		});
 	});
