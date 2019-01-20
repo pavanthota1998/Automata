@@ -1,3 +1,5 @@
+const _ = require('underscore')._;
+
 class NFA {
 	constructor(tuple) {
 		this.states = tuple.states;
@@ -28,6 +30,28 @@ class NFA {
 
 	changeState(finalState, alphabet) {
 		return this.transitionFunction[finalState][alphabet];
+	}
+
+	doesAccept(string) {
+		let finalStates = [this.startingState];
+		this.addEpsilons(finalStates);
+		let nextStates;
+		let temp = [];
+
+		string.split('').forEach((alphabet) => {
+			finalStates.forEach((state) => {
+				nextStates = this.changeState(state, alphabet);
+				!_.isEmpty(nextStates) && temp.push(...nextStates);
+			});
+			this.addEpsilons(finalStates);
+
+			finalStates = [...temp];
+			temp = [];
+		});
+
+		return this.acceptableStates.some((state) => {
+			return finalStates.includes(state);
+		});
 	}
 }
 

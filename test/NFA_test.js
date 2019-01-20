@@ -71,6 +71,42 @@ describe('#NFA', () => {
 				assert.deepEqual(nfa.changeState('q1', 'e'), ['q2', 'q5']);
 			});
 		});
+
+		describe('Pass cases', () => {
+			it('should accept the string 101', () => {
+				assert.ok(nfa.doesAccept('101'));
+			});
+
+			it('should accept the string 10101', () => {
+				assert.ok(nfa.doesAccept('10101'));
+			});
+
+			it('should accept the string 1010101', () => {
+				assert.ok(nfa.doesAccept('1010101'));
+			});
+
+			it('should accept the string 01010', () => {
+				assert.ok(nfa.doesAccept('01010'));
+			});
+
+			it('should accept the string 0101010', () => {
+				assert.ok(nfa.doesAccept('0101010'));
+			});
+		});
+
+		describe('Fail cases', () => {
+			it('should not accept the string 10', () => {
+				assert.ok(!nfa.doesAccept('10'));
+			});
+
+			it('should not accept the string with consequent alphabets', () => {
+				assert.ok(!nfa.doesAccept('1001'));
+			});
+
+			it('should not accept the string with alternative alphabets but not ending with the starting alphabet', () => {
+				assert.ok(!nfa.doesAccept('101010'));
+			});
+		});
 	});
 });
 
