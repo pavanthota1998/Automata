@@ -63,11 +63,11 @@ describe('#NFA', () => {
 				assert.deepEqual(nfa.changeState('q2', 0), ['q3']);
 			});
 
-			it('should return q4 in an array when passed q3 as state and 1 as alphabet', function () {
+			it('should return undefined in an array when passed q3 as state and 1 as alphabet', function () {
 				assert.isNotOk(nfa.changeState('q2', 1));
 			});
 
-			it('should return q4 in an array when passed q3 as state and 1 as alphabet', function () {
+			it('should return ["q2", "q5"] in an array when passed q1 as state and e as alphabet', function () {
 				assert.deepEqual(nfa.changeState('q1', 'e'), ['q2', 'q5']);
 			});
 		});
