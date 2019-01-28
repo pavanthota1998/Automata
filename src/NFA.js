@@ -15,7 +15,7 @@ class NFA {
 		let eplisonStates;
 		do {
 			statesToCheckForEpsilon.forEach((state) => {
-				if (Object.keys(this.transitionFunction[state]).includes('e')) {
+				if (this.transitionFunction[state] && Object.keys(this.transitionFunction[state]).includes('e')) {
 					eplisonStates = this.transitionFunction[state]['e'].filter((state) => {
 						return !currentStates.includes(state);
 					});
@@ -29,7 +29,7 @@ class NFA {
 	}
 
 	changeState(finalState, alphabet) {
-		return this.transitionFunction[finalState][alphabet];
+		return this.transitionFunction[finalState] && this.transitionFunction[finalState][alphabet];
 	}
 
 	doesAccept(string) {
@@ -43,9 +43,9 @@ class NFA {
 				nextStates = this.changeState(state, alphabet);
 				!_.isEmpty(nextStates) && temp.push(...nextStates);
 			});
-			this.addEpsilons(finalStates);
 
 			finalStates = [...temp];
+			this.addEpsilons(finalStates);
 			temp = [];
 		});
 
